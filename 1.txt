@@ -1,0 +1,15 @@
+class Battery:
+    def __init__(self, max_charge=5):
+        self.capacity = []
+        self.max_charge = max_charge
+    
+    def charge(self):
+        if len(self.capacity) < self.max_charge:
+            self.capacity.append(")")
+    
+    def discharge(self):
+        if len(self.capacity) > 0:
+            self.capacity.pop()
+    
+    def __str__(self):
+        return "[" + "".join(self.capacity) + "]" + " - " + str(len(self.capacity)) + " charge(s)"
