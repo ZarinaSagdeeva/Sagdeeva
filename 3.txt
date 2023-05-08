@@ -1,0 +1,37 @@
+a)
+class Matrix:
+    def __init__(self, data):
+        self.data = data
+b)
+class Matrix:
+    def __init__(self, data):
+        self.data = data
+    
+    def __str__(self):
+        result = ""
+        for row in self.data:
+            result += " ".join(str(x) for x in row) + "\n"
+        return result
+c)
+class Matrix:
+    def __init__(self, data):
+        self.data = data
+    
+    def __str__(self):
+        result = ""
+        for row in self.data:
+            result += " ".join(str(x) for x in row) + "\n"
+        return result
+    
+    def __add__(self, other):
+        if len(self.data) != len(other.data) or len(self.data[0]) != len(other.data[0]):
+            raise ValueError("Matrices must be of same size")
+        
+        result = []
+        for i in range(len(self.data)):
+            row = []
+            for j in range(len(self.data[0])):
+                row.append(self.data[i][j] + other.data[i][j])
+            result.append(row)
+        
+        return Matrix(result)
