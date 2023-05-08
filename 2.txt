@@ -1,0 +1,58 @@
+from abc import ABC, abstractmethod
+
+class Cloth(ABC):
+    reserved = 0
+    
+    def __init__(self, name):
+        self.name = name
+    
+    @abstractmethod
+    def fabric_required(self):
+        pass
+
+class Coat(Cloth):
+    def __init__(self, name, size):
+        super().__init__(name)
+        self.size = size
+    
+    def fabric_required(self):
+        return self.size / 6.5 + 0.5
+    
+    @property
+    def size(self):
+        return self.__size
+    
+    @size.setter
+    def size(self, value):
+        if value < 0:
+            raise ValueError("Size cannot be negative")
+        self.__size = value
+        
+
+class Suit(Cloth):
+    def __init__(self, name, height):
+        super().__init__(name)
+        self.height = height
+    
+    def fabric_required(self):
+        return 2 * self.height + 0.3
+    
+    @property
+    def height(self):
+        return self.__height
+    
+    @height.setter
+    def height(self, value):
+        if value < 0:
+            raise ValueError("Height cannot be negative")
+        self.__height = value
+
+coat1 = Coat("Winter Coat", 50)
+suit1 = Suit("Business Suit", 180)
+
+print(coat1.fabric_required()) # Output: 8.076923076923077
+print(suit1.fabric_required()) # Output: 360.3
+
+Cloth.reserved += coat1.fabric_required() + suit1.fabric_required()
+
+print(Cloth.reserved) # Output: 368.37692307692305
